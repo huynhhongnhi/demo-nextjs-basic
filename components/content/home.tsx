@@ -1,26 +1,21 @@
 import { authApi } from '@/api/auth-api'
 import { useEffect, useState } from 'react'
 
-export interface HomeSProps{}
+export interface HomeSProps{
+    data: any[]
+}
 
 export function HomeS(props: HomeSProps) {
     const [postList, setPostList] = useState([])
-    const { getPost } = authApi
+    const { getPost } = authApi;
 
-    useEffect( () => {
-        async function listPost() {
-            const response = await getPost();
-			const { data } = await response.data;
-			setPostList(data);
-        }
-        listPost()
-    }, []);
+    const propsPost = props.data
 
   return (
     <div className="row tm-catalog-item-list">
         {
-             postList.map((post) => (
-                    <div key={post._id} className="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+             propsPost.map((post, index) => (
+                    <div key={index} className="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
                         <div className="position-relative tm-thumbnail-container">
                             <input type="image" src="img/tn-01.jpg" alt={"photo"} className="img-fluid tm-catalog-item-img" />
                         </div>

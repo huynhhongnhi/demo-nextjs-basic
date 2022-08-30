@@ -23,12 +23,16 @@ export default function PostPage(props: PostPageProps) {
 
     React.useEffect( () => {
         async function getProfile() {
-            const res = await authApi.getProfile();
-            if (res && res.data) {
-                const { data } = res.data;
-                setProfile(data);
-            } else {
-                router.push('/')
+            try {
+                const res = await authApi.getProfile();
+                if (res && res.data) {
+                    const { data } = res.data;
+                    setProfile(data);
+                } 
+            } catch (error: any) {
+                if (error.response && error.response.status == '403') {
+                    router.push('/login')
+                }
             }
         }
         getProfile();

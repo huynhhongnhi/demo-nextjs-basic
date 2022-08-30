@@ -6,12 +6,7 @@ export const authApi = {
         return axiosClient.post('auth/login', payload)
     },
     getProfile() {
-        try {
-            return axiosClient.get('/me')
-        } catch (error) {
-            console.log('>>>>>>error')
-            console.log(error)
-        }
+        return axiosClient.get('/me')
     },
     getPost() {
         return axiosClient.get('/posts')

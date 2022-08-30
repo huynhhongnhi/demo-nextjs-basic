@@ -5,7 +5,17 @@ export interface NavbarProps{}
 
 export function Navbar(props: NavbarProps) {
 
-    const { pathname } = useRouter();
+    const { pathname, push } = useRouter();
+
+    const handerSubmit = () => {
+        localStorage.removeItem('isAuth');
+        push('/');
+    }
+
+    let auth = false
+    if (typeof window !== 'undefined') {
+        auth = (localStorage.getItem('isAuth')) ? true : false;
+    }
 
     return (
         <nav className="navbar navbar-expand-lg mr-0 ml-auto" id="tm-main-nav">
@@ -23,11 +33,15 @@ export function Navbar(props: NavbarProps) {
                         <Link href="/"><a className="nav-link tm-nav-link">Home</a></Link>
                     </li>
                     <li className={`${pathname === '/posts' ? 'nav-item active' : 'nav-item'}`}>
-                        <Link href="/posts"><a className="nav-link tm-nav-link">Admin</a></Link>
+                        <Link href="/posts"><a className="nav-link tm-nav-link">Admin {auth}</a></Link>
                     </li>
-                    <li className={`${pathname === '/login' ? 'nav-item active' : 'nav-item'}`}>
+                    {
+                        !auth ? (<li className={`${pathname === '/login' ? 'nav-item active' : 'nav-item'}`}>
                         <Link href="/login"><a className="nav-link tm-nav-link">Login</a></Link>
-                    </li>
+                    </li>) : (<li className='nav-item'>
+                        <a href='javascript:void(0)' onClick={handerSubmit} className="nav-link tm-nav-link">Logout</a>
+                    </li>)
+                    }
                 </ul>
             </div>
         </nav>

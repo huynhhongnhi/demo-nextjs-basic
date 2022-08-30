@@ -20,6 +20,7 @@ export default function LoginPage(props: LoginPageProps) {
 
     const res = await authApi.login({ email, password });
     if (res) {
+      localStorage.setItem('isAuth', 'true');
       router.push('/')
     }
   }

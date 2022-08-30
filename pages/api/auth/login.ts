@@ -43,7 +43,6 @@ export default function handler(
               sameSite: 'lax'
             }
           )
-  
           ;(res as NextApiResponse).status(200).json({message: 'login thanh cong'})
         } catch (error) {
           (res as NextApiResponse).status(500).json({message: 'login error'})

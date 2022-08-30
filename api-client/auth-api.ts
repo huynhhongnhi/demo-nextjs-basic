@@ -3,10 +3,15 @@ import axiosClient from "./axios-client"
 
 export const authApi = {
     login(payload: LoginPayload) {
-        return axiosClient.post('login', payload)
+        return axiosClient.post('auth/login', payload)
     },
     getProfile() {
-        return axiosClient.get('/me')
+        try {
+            return axiosClient.get('/me')
+        } catch (error) {
+            console.log('>>>>>>error')
+            console.log(error)
+        }
     },
     getPost() {
         return axiosClient.get('/posts')

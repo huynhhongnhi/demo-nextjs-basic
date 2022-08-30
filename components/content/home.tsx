@@ -14,7 +14,7 @@ export function HomeS(props: HomeSProps) {
 			setPostList(data);
         }
         listPost()
-        }, []);
+    }, []);
 
   return (
     <div className="row tm-catalog-item-list">
@@ -30,7 +30,7 @@ export function HomeS(props: HomeSProps) {
                         </div>
                     </div> 
                 )
-              )
+            )
         }
     </div>
   )
